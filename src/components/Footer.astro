@@ -2,7 +2,6 @@
 import {Image} from 'astro:assets'
 import {site} from '../config/site'
 import footerBeansBg from '../assets/images/footer-beans-transparent.png'
-import logoNaKavicku from '../assets/images/logo-na-kavicku.png'
 ---
 
 <footer class="footer-root relative overflow-visible bg-[#2a160c] text-white">
@@ -25,11 +24,11 @@ import logoNaKavicku from '../assets/images/logo-na-kavicku.png'
   <div class="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3">
     <div>
       <div class="flex items-center gap-3">
-        <Image
-          src={logoNaKavicku}
+        <img
+          src="/images/logo-na-kavicku-2-120x60.png"
           alt={`Logo ${site.name}`}
-          widths={[120, 180, 240]}
-          sizes="96px"
+          width="120"
+          height="60"
           class="footer-brand-logo h-10 w-auto object-contain"
         />
         <div class="text-lg font-semibold">{site.name}</div>
@@ -130,6 +129,11 @@ import logoNaKavicku from '../assets/images/logo-na-kavicku.png'
     opacity: 0.92;
     mix-blend-mode: normal;
     filter: brightness(1.02) contrast(1.08) saturate(1.02) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3));
+  }
+
+  .footer-brand-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.98;
   }
 
 </style>

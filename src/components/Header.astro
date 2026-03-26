@@ -1,7 +1,5 @@
 ---
-import {Image} from 'astro:assets'
 import {site} from '../config/site'
-import logoNaKavicku from '../assets/images/logo-na-kavicku.png'
 
 const nav = [
   {href: '#uvod', label: 'Úvod'},
@@ -14,12 +12,12 @@ const nav = [
 <header class="sticky top-0 z-40 border-b border-white/10 bg-[#2a160c]/88 backdrop-blur supports-[backdrop-filter]:bg-[#2a160c]/80">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
     <a href="/" class="group inline-flex items-center">
-      <Image
-        src={logoNaKavicku}
+      <img
+        src="/images/logo-na-kavicku-2-120x60.png"
         alt={`Logo ${site.name}`}
-        widths={[240, 360, 520]}
-        sizes="(min-width: 768px) 220px, 170px"
-        class="h-14 w-auto object-contain md:h-16"
+        width="120"
+        height="60"
+        class="header-brand-logo h-14 w-auto object-contain md:h-16"
       />
     </a>
 
@@ -62,4 +60,11 @@ const nav = [
     </details>
   </div>
 </header>
+
+<style is:inline>
+  .header-brand-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.98;
+  }
+</style>
 
