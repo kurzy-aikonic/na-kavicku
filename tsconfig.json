@@ -1,0 +1,10 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    "types": ["astro/client"]
+  }
+}
+

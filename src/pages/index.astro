@@ -1,0 +1,787 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import {site} from '../config/site'
+import {Image} from 'astro:assets'
+import {getHomepageContent} from '../lib/sanity/homepage'
+
+import gallery1 from '../assets/images/gallery-1.jpg'
+import gallery2 from '../assets/images/gallery-2.jpg'
+import gallery3 from '../assets/images/gallery-3.jpg'
+import gallery4 from '../assets/images/gallery-4.jpg'
+import gallery5 from '../assets/images/gallery-5.jpg'
+import gallery6 from '../assets/images/gallery-6.jpg'
+import bean1 from '../assets/images/bean-1.png'
+import bean2 from '../assets/images/bean-2.png'
+import bean3 from '../assets/images/bean-3.png'
+import bean4 from '../assets/images/bean-4.png'
+import bean5 from '../assets/images/bean-5.png'
+import bean6 from '../assets/images/bean-6.png'
+import bean7 from '../assets/images/bean-7.png'
+import bean8 from '../assets/images/bean-8.png'
+import bean9 from '../assets/images/bean-9.png'
+
+const title = `${site.name} – Kavárna Ostrava | Výběrová káva a nápojový lístek`
+const description =
+  'Na kávičku v Ostravě: výběrová káva, domácí zákusky, míchané drinky a interaktivní nápojový lístek. Přijďte posedět na Hlavní tř. 840.'
+
+const homepageFallback = {
+  heroTitle: 'Kam v Ostravě',
+  heroHighlight: 'na kávičku?',
+  heroSubtitle: 'Přece Na kávičku! Kavárna, do které se budete rádi vracet.',
+  aboutEyebrow: 'Pečeme i vaříme srdcem',
+  aboutHeading: 'Věříme, že káva je víc',
+  aboutCards: [
+    {
+      title: 'Káva, která vás probudí i pohladí',
+      text: 'Voňavá, silná, připravená s láskou. Vykouzlí úsměv ještě dřív, než dopijete první doušek.',
+    },
+    {
+      title: 'Kavárna jako životní styl',
+      text: 'Přijďte zažít milou atmosféru a prostor, kam se budete chtít vracet.',
+    },
+    {
+      title: 'Chutě bez zkratek',
+      text: 'Pečeme poctivě z vajec, mouky a másla. Žádné kompromisy.',
+    },
+  ],
+  reviewsEyebrow: 'Recenze hostů',
+  reviewsHeading: 'Jak nás hodnotíte',
+  reviewsIntro: 'Vaše zkušenosti jsou pro nás důležité. Mrkni na hodnocení a přidej svou recenzi.',
+  reviews: [
+    {
+      rating: 5,
+      text: 'Skvělá atmosféra, výborná káva a milá obsluha. Místo, kam se rádi vracíme.',
+      author: 'Jana M.',
+      source: 'Google recenze',
+    },
+    {
+      rating: 5,
+      text: 'Příjemné prostředí i výběr nápojů. Perfektní zastávka na kávu v Ostravě.',
+      author: 'Tomáš K.',
+      source: 'Google recenze',
+    },
+    {
+      rating: 5,
+      text: 'Domácí zákusky, kvalitní suroviny a pohodová energie. Doporučujeme.',
+      author: 'Petra V.',
+      source: 'Google recenze',
+    },
+  ],
+} as const
+
+const homepage = await getHomepageContent(homepageFallback)
+
+const serviceHighlights = [
+  {id: 'wifi', label: 'Wi-fi zdarma'},
+  {id: 'accessible', label: 'Bezbariérový přístup'},
+  {id: 'pets', label: 'Mazlíčci vítáni'},
+  {id: 'card', label: 'Platba kartou'},
+  {id: 'atmosphere', label: 'Milá atmosféra'},
+  {id: 'events', label: 'Soukromé akce'},
+  {id: 'outdoor', label: 'Venkovní posezení'},
+  {id: 'catering', label: 'Catering'},
+] as const
+
+const menuSections = [
+  {
+    id: 'ledove-speciality',
+    title: 'Ledové speciality',
+    items: [
+      {name: 'Rooibos ledový čaj', price: '99 Kč', desc: 'Red Espresso, Cappy jablko a pomeranč.'},
+      {name: 'Rooibos ledové Americano s medem', price: '85 Kč'},
+      {name: 'Pomerančová ledová čokoláda', price: '119 Kč', desc: 'Pomerančová čokoláda, sirup, topping, šlehačka.'},
+      {name: 'Oříšková ledová čokoláda', price: '119 Kč', desc: 'Oříšková čokoláda, sirup, topping, šlehačka.'},
+      {name: 'Ledové Chai Latte se skořicí', price: '89 Kč'},
+      {name: 'Matcha / Kurkuma latte na ledu', price: '89 Kč'},
+      {name: 'Borůvkové / Višňové frappé', price: '119 Kč', desc: 'Sirup, ledově vyšlehané mléko, espresso, ovoce.'},
+      {name: 'Frappé', price: '75 Kč', desc: 'Espresso, ledově vyšlehané mléko.'},
+      {name: 'Espresso affogato', price: '79 Kč', desc: 'Espresso a 1x kopeček vanilkové zmrzliny.'},
+      {name: 'Espresso tonic', price: '79 Kč', desc: 'Espresso, Kinley tonic water, citron.'},
+      {name: 'Malinové espresso tonic', price: '95 Kč', desc: 'Espresso, Kinley tonic, malinový sirup, maliny, citron.'},
+      {name: 'Espresso orange', price: '79 Kč', desc: 'Espresso, Cappy pomeranč a plátek pomeranče.'},
+      {name: 'Ledová káva se zmrzlinou', price: '109 Kč', desc: 'Americano, 2x vanilka, topping, šlehačka, kakao.'},
+      {name: 'Latte macchiatto na ledu', price: '75 Kč'},
+    ],
+  },
+  {
+    id: 'limonady',
+    title: 'Osvěžující limonády',
+    items: [
+      {name: 'Malina 62%', price: '85 Kč'},
+      {name: 'Jahoda s mátou 60%', price: '85 Kč'},
+      {name: 'Višeň 57%', price: '85 Kč'},
+      {name: 'Pomeranč 76%', price: '85 Kč'},
+      {name: 'Grep 70%', price: '85 Kč'},
+      {name: 'Černý a červený rybíz 70%', price: '85 Kč'},
+      {name: 'Jablko 60%', price: '85 Kč'},
+      {name: 'Citron s limetkou 45%', price: '85 Kč'},
+      {name: 'Okurka', price: '85 Kč'},
+      {name: 'Bezový květ', price: '85 Kč'},
+      {name: 'Levandule', price: '85 Kč'},
+      {name: 'Litrová limonáda', price: '125 Kč'},
+    ],
+  },
+  {
+    id: 'kava',
+    title: 'Káva',
+    items: [
+      {name: 'Espresso', price: '55 Kč'},
+      {name: 'Espresso doppio', price: '79 Kč', desc: 'Dvojité espresso.'},
+      {name: 'Espresso lungo', price: '55 Kč'},
+      {name: 'Espresso americano', price: '59 Kč', desc: 'Espresso s horkou vodou.'},
+      {name: 'Espresso macchiatto', price: '65 Kč', desc: 'Espresso s našlehanou pěnou.'},
+      {name: 'Cappuccino', price: '75 Kč', desc: 'Espresso s našlehaným mlékem.'},
+      {name: 'Flat white', price: '89 Kč', desc: 'Doppio s našlehaným mlékem.'},
+      {name: 'Latte macchiatto', price: '75 Kč', desc: 'Espresso s našlehaným mlékem.'},
+      {name: 'Vídeňská káva', price: '79 Kč', desc: 'Americano s domácí šlehačkou.'},
+      {name: 'Alžírská káva', price: '89 Kč', desc: 'Americano, vaječný likér, domácí šlehačka.'},
+      {name: 'Irská káva', price: '99 Kč', desc: 'Americano, Tullamore Dew, domácí šlehačka.'},
+      {name: 'Turecká káva', price: '55 Kč'},
+      {name: 'Mléko navíc', price: '+6 Kč'},
+      {name: 'Bezlaktózové / Sójové / Kokosové mléko', price: '+16 Kč'},
+      {name: 'Dávka kávy navíc', price: '+30 Kč'},
+      {name: 'Bezkofeinová káva Trismoka', price: '+16 Kč'},
+      {name: 'Sirupy dle nabídky', price: '+12 Kč'},
+    ],
+  },
+  {
+    id: 'cokolada-caje',
+    title: 'Čokoláda a čaje',
+    items: [
+      {name: 'Horká čokoláda mléčná / hořká / oříšková / bílá / pomerančová', price: '69 Kč', desc: 'S domácí šlehačkou.'},
+      {name: 'Čerstvý čaj mátový', price: '79 Kč'},
+      {name: 'Čerstvý čaj zázvorový', price: '79 Kč'},
+      {name: 'Italský čaj černý', price: '79 Kč', desc: 'S medem a citronem.'},
+      {name: 'Italský čaj zelený', price: '79 Kč', desc: 'S medem a citronem.'},
+      {name: 'Italský čaj heřmánkový', price: '79 Kč', desc: 'S medem a citronem.'},
+      {name: 'Italský čaj ovocný', price: '79 Kč', desc: 'S medem a citronem.'},
+    ],
+  },
+  {
+    id: 'nealko',
+    title: 'Nealko nápoje',
+    items: [
+      {name: 'Coca‑Cola / Zero 0,33 l', price: '59 Kč'},
+      {name: 'Fanta / Sprite 0,33 l', price: '55 Kč'},
+      {name: 'Romerquelle 0,33 l', price: '55 Kč', desc: 'Neperlivá / Citronová tráva / Jemně perlivá.'},
+      {name: 'Kinley tonic 0,25 l', price: '55 Kč', desc: 'Dle nabídky.'},
+      {name: 'Cappy džus 0,25 l', price: '55 Kč', desc: 'Dle nabídky.'},
+      {name: 'Pomerančový fresh 0,2 l', price: '69 Kč'},
+      {name: 'Neperlivá karafa s citrusy 0,5 l', price: '45 Kč'},
+      {name: 'Neperlivá karafa s citrusy 1 l', price: '55 Kč'},
+      {name: 'Perlivá karafa s citrusy 0,5 l', price: '55 Kč'},
+      {name: 'Perlivá karafa s citrusy 1 l', price: '65 Kč'},
+    ],
+  },
+  {
+    id: 'nealko-drinky',
+    title: 'Míchané nealko',
+    items: [
+      {name: 'Crodino Spritz', price: '89 Kč', desc: 'Crodino aperitiv, soda, grep / pomeranč.'},
+      {name: 'Bezinkové bubliny', price: '79 Kč', desc: 'Kinley Pink Berry, bezinkový sirup, grep.'},
+      {name: 'Zázvorový elixír', price: '79 Kč', desc: 'Kinley Ginger Ale, hruška se zázvorem, křížaly.'},
+      {name: 'Nealko limetkové mojito', price: '89 Kč'},
+      {name: 'Nealko smetanová Piña', price: '89 Kč'},
+    ],
+  },
+  {
+    id: 'pivo',
+    title: 'Pivo',
+    items: [
+      {name: 'Čepovaná Plzeň 0,3 l / 0,5 l', price: '59 / 69 Kč'},
+      {name: 'Beskydský pivovárek Borůvka 12°', price: '69 Kč'},
+      {name: 'Beskydský ležák 11°', price: '64 Kč'},
+      {name: 'Beskydský pivovárek Dračí ovoce (nealko)', price: '69 Kč'},
+      {name: 'Birell světlý 0,5 l', price: '59 Kč'},
+      {name: 'Birell Pomelo + grep 0,5 l', price: '59 Kč'},
+    ],
+  },
+  {
+    id: 'neco-na-zub',
+    title: 'Něco na zub',
+    items: [
+      {name: 'Arašídy / Mandle', price: '59 Kč'},
+      {name: 'Pistácie / Kešu', price: '65 Kč'},
+      {name: 'Cyrilovy brambůrky slané / hořčičné', price: '59 Kč'},
+      {name: 'Šunkový chlebíček', price: '49 Kč', desc: 'Veka, pařížský salát, šunka, vajíčko, obloha.'},
+      {name: 'Zapékané panini', price: '69 Kč', desc: 'Bageta, pomazánkové máslo, šunka, sýr, kečup, zelenina.'},
+    ],
+  },
+  {
+    id: 'michane-alko',
+    title: 'Míchané alko',
+    items: [
+      {name: 'Espresso Martini', price: '109 Kč'},
+      {name: 'Jablečný speciál', price: '119 Kč'},
+      {name: 'Aperol Spritz', price: '119 Kč'},
+      {name: 'Pan Hugo', price: '109 Kč'},
+      {name: 'Kokosová Finská', price: '114 Kč'},
+      {name: 'Růžová Finská', price: '109 Kč'},
+      {name: 'Mátová Finská', price: '109 Kč'},
+      {name: 'Prosecco Spritz Levandule', price: '104 Kč'},
+      {name: 'Limetkové mojito', price: '119 Kč'},
+      {name: 'Smetanová Piña', price: '119 Kč'},
+      {name: 'Safírový Gin & Tonic', price: '114 Kč'},
+      {name: 'Bifíček & Tonic', price: '109 Kč'},
+      {name: 'Martini Fiero & Tonic', price: '119 Kč'},
+    ],
+  },
+  {
+    id: 'deci-na-chut',
+    title: 'Deci na chuť',
+    items: [
+      {name: 'Marina Alta – bílé polosuché', price: '39 Kč'},
+      {name: 'Chardonnay – bílé suché', price: '39 Kč'},
+      {name: 'Merlot – červené suché', price: '39 Kč'},
+      {name: 'Prosecco – suché', price: '54 Kč'},
+      {name: 'Fragolino', price: '59 Kč'},
+      {name: 'Mangové frizzante', price: '64 Kč'},
+      {name: 'Martini Bianco', price: '74 Kč'},
+      {name: 'Martini Fiero', price: '74 Kč'},
+      {name: 'Martini Extra Dry', price: '74 Kč'},
+    ],
+  },
+  {
+    id: 'horke-alko',
+    title: 'Horké alko',
+    items: [
+      {name: "Čokoláda s Bailey's", price: '109 Kč', desc: 'Čokoláda dle výběru, Bailey’s, šlehačka, kakao.'},
+      {name: 'Bombardino', price: '89 Kč', desc: 'Bombardino, domácí šlehačka, skořice, sušenka.'},
+      {name: 'Grog s Jelínkem', price: '79 Kč'},
+      {name: 'Horká Griottka', price: '79 Kč'},
+      {name: 'Ohnivý štrůdl', price: '109 Kč'},
+    ],
+  },
+  {
+    id: 'po-panaku',
+    title: 'Po panáku 0,04 l',
+    items: [
+      {name: 'Grey Goose Original', price: '109 Kč'},
+      {name: 'Finlandia Classic', price: '69 Kč'},
+      {name: 'Finlandia Botanical Cucumber & Mint', price: '69 Kč'},
+      {name: 'Finlandia Botanical Wildberry & Rose', price: '69 Kč'},
+      {name: 'Finlandia Coconut', price: '69 Kč'},
+      {name: 'Slivovice R. Jelínek', price: '64 Kč'},
+      {name: 'Ouzo Helenas', price: '59 Kč'},
+      {name: 'Chivas Regal 12Y', price: '99 Kč'},
+      {name: "Grant's", price: '69 Kč'},
+      {name: 'Jameson', price: '69 Kč'},
+      {name: "Jack Daniel's", price: '89 Kč'},
+      {name: "Jack Daniel's Honey", price: '89 Kč'},
+      {name: "Jack Daniel's Fire", price: '89 Kč'},
+      {name: "Jack Daniel's Apple", price: '89 Kč'},
+      {name: 'Tullamore Dew', price: '69 Kč'},
+      {name: 'Olmeca Blanco', price: '89 Kč'},
+      {name: 'Olmeca Reposado', price: '89 Kč'},
+      {name: 'Bacardi Reserva Ocho', price: '109 Kč'},
+      {name: 'Bacardi Spiced', price: '79 Kč'},
+      {name: 'Bacardi Carta Blanca', price: '79 Kč'},
+      {name: 'Pyrat XO Reserve', price: '119 Kč'},
+      {name: 'Brugal 1888', price: '149 Kč'},
+      {name: 'Brugal Anejo', price: '89 Kč'},
+      {name: 'Ron Diplomatico Exclusiva', price: '139 Kč'},
+      {name: 'Capitan Bucanero', price: '89 Kč'},
+      {name: 'Havana Club 7yo', price: '99 Kč'},
+      {name: 'Republica', price: '54 Kč'},
+      {name: 'Republica Honey', price: '54 Kč'},
+      {name: 'Bombay Sapphire', price: '84 Kč'},
+      {name: 'Beefeater', price: '74 Kč'},
+      {name: 'Beefeater Pink', price: '74 Kč'},
+      {name: 'Beefeater Blood Orange', price: '74 Kč'},
+      {name: 'Beefeater Zesty Lemon', price: '74 Kč'},
+      {name: 'Kahlúa', price: '74 Kč'},
+      {name: 'Jägermeister', price: '69 Kč'},
+      {name: 'Jägermeister Orange', price: '69 Kč'},
+      {name: 'Becherovka', price: '59 Kč'},
+      {name: "Bailey's", price: '69 Kč'},
+    ],
+  },
+] as const
+---
+
+<BaseLayout title={title} description={description} path="/">
+  <section id="uvod" class="brew-hero relative overflow-hidden scroll-mt-28 text-white">
+    <div class="absolute inset-0 z-[1] hidden md:block" aria-hidden="true">
+      <Image src={bean1} alt="" widths={[64, 96]} sizes="80px" class="bean bean-a bean-interactive" />
+      <Image src={bean2} alt="" widths={[64, 96]} sizes="72px" class="bean bean-b bean-interactive" />
+      <Image src={bean3} alt="" widths={[64, 96]} sizes="78px" class="bean bean-c bean-interactive" />
+      <Image src={bean4} alt="" widths={[64, 96]} sizes="72px" class="bean bean-d bean-interactive" />
+      <Image src={bean5} alt="" widths={[64, 96]} sizes="86px" class="bean bean-e bean-interactive" />
+    </div>
+    <div class="mx-auto max-w-6xl px-4 pb-28 pt-12 md:pb-36 md:pt-16">
+      <div class="relative z-10 mt-6 reveal md:mt-10">
+        <div class="reveal max-w-3xl">
+          <h1 class="text-balance text-5xl font-black uppercase leading-[0.88] tracking-tight md:text-8xl">
+            {homepage.heroTitle} <span class="text-[#f3b62d]">{homepage.heroHighlight}</span>
+          </h1>
+          <p class="mt-5 max-w-xl text-sm text-white/80 md:text-base">
+            {homepage.heroSubtitle}
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4 md:mt-12">
+            <a href="#napojovy-listek" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#2d1a0f] transition hover:-translate-y-0.5">Nápojový lístek</a>
+            <a href="#o-kavarne" class="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">O kavárně</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-edge absolute inset-x-0 bottom-0 z-20 h-22 md:h-28" aria-hidden="true"></div>
+  </section>
+
+  <section id="o-kavarne" class="mx-auto max-w-6xl scroll-mt-28 px-4 py-14 reveal md:py-16">
+    <div class="mb-10 text-center reveal">
+      <p class="text-xs uppercase tracking-[0.2em] text-[#8b6540]">{homepage.aboutEyebrow}</p>
+      <h2 class="mt-2 text-4xl font-black uppercase leading-none text-[#2b1d14] md:text-6xl">{homepage.aboutHeading}</h2>
+    </div>
+    <div class="grid gap-6 md:grid-cols-3">
+      {homepage.aboutCards.map((card) => (
+        <div class="rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-lg font-semibold text-[#121212]">{card.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-black/70">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="napojovy-listek" class="relative scroll-mt-28 overflow-hidden bg-[#2a160c] py-14 text-white reveal">
+    <div class="absolute inset-0 z-[1] hidden lg:block" aria-hidden="true">
+      <Image src={bean6} alt="" widths={[64, 96, 128]} sizes="90px" class="bean bean-f bean-interactive" />
+      <Image src={bean7} alt="" widths={[64, 96, 128]} sizes="92px" class="bean bean-g bean-interactive" />
+      <Image src={bean8} alt="" widths={[64, 96, 128]} sizes="100px" class="bean bean-h bean-interactive" />
+      <Image src={bean9} alt="" widths={[64, 96, 128]} sizes="88px" class="bean bean-i bean-interactive" />
+    </div>
+    <div class="paper-edge-top absolute inset-x-0 top-0 h-14" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-6xl px-4">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <h2 class="mt-3 text-3xl font-black uppercase tracking-tight md:text-5xl">Nápojový lístek</h2>
+          <p class="mt-3 max-w-xl text-sm text-white/75">Kompletní nabídka z lístku. Filtrovat můžete podle sekcí a vyhledávání.</p>
+        </div>
+      </div>
+
+      <div class="mt-7 rounded-2xl bg-white/6 p-3 ring-1 ring-white/15">
+        <div class="flex flex-wrap gap-2" id="menu-filters">
+          <button data-filter="all" class="menu-chip is-active rounded-full bg-white px-4 py-2 text-sm font-semibold text-black">Vše</button>
+          {menuSections.map((section) => (
+            <button data-filter={section.id} class="menu-chip rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white">{section.title}</button>
+          ))}
+        </div>
+        <label class="mt-3 block">
+          <span class="sr-only">Vyhledat v menu</span>
+          <input id="menu-search" type="text" placeholder="Hledat v menu (např. espresso, tonic, prosecco...)" class="w-full rounded-xl border border-white/20 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none ring-0 focus:border-white/40" />
+        </label>
+        <div class="mt-3 flex items-center justify-between gap-3">
+          <p id="menu-page-info" class="text-xs text-white/65">Strana 1 z 1</p>
+          <div class="flex items-center gap-2">
+            <button id="menu-prev" type="button" class="rounded-lg border border-white/20 px-3 py-1.5 text-xs font-semibold text-white/90 hover:bg-white/10">Předchozí</button>
+            <button id="menu-next" type="button" class="rounded-lg border border-white/20 px-3 py-1.5 text-xs font-semibold text-white/90 hover:bg-white/10">Další</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-3 md:grid-cols-2" id="menu-grid">
+        {menuSections.map((section) => (
+          <details data-category={section.id} class="menu-section group rounded-2xl bg-white/6 p-4 ring-1 ring-white/15 transition hover:bg-white/10">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-semibold">{section.title}</h3>
+                <p class="mt-1 text-xs text-white/60">{section.items.length} položek</p>
+              </div>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <div class="mt-3 grid gap-2">
+              {section.items.map((item) => (
+                <div class="menu-item rounded-xl bg-black/15 px-3 py-2" data-search={`${section.title} ${item.name} ${item.desc ?? ''}`}>
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <p class="text-sm font-semibold text-white">{item.name}</p>
+                      {item.desc && <p class="mt-0.5 text-xs text-white/60">{item.desc}</p>}
+                    </div>
+                    <p class="shrink-0 rounded-lg bg-white/10 px-2 py-1 text-xs font-semibold text-[#f3b62d]">{item.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+    <div class="paper-edge absolute inset-x-0 bottom-0 h-14" aria-hidden="true"></div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 reveal md:py-14">
+    <div class="md:px-2">
+      <p class="text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6540]">Co u nás najdete</p>
+      <div class="mt-6 overflow-x-auto pb-1">
+        <div class="mx-auto flex min-w-max items-start justify-center gap-8">
+        {serviceHighlights.map((item) => (
+          <article class="group p-1 text-center">
+            <div class="mb-2 inline-flex size-11 items-center justify-center text-[#2a160c] transition duration-200 group-hover:-translate-y-0.5 group-hover:text-[#8b6540]">
+              {item.id === 'wifi' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <path d="M2.5 8.5a14.5 14.5 0 0 1 19 0M5.8 12a9.8 9.8 0 0 1 12.4 0M9.3 15.6a5 5 0 0 1 5.4 0M12 19h.01" stroke-linecap="round" />
+                </svg>
+              )}
+              {item.id === 'accessible' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <circle cx="12.2" cy="4.6" r="1.6" />
+                  <path d="M10.8 9.2h3.2l2.1 2.4" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M11.5 9.2 9.3 13" stroke-linecap="round" />
+                  <path d="M9.4 13h3.8l1.4 2.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M12.2 15.1a4.1 4.1 0 1 0 3.9-2.8" stroke-linecap="round" />
+                </svg>
+              )}
+              {item.id === 'pets' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <path d="M8 10.2A2.2 2.2 0 1 1 5.8 8 2.2 2.2 0 0 1 8 10.2Zm10.2 0A2.2 2.2 0 1 1 16 8a2.2 2.2 0 0 1 2.2 2.2ZM11 7.8A2 2 0 1 1 9 5.8a2 2 0 0 1 2 2Zm5 0A2 2 0 1 1 14 5.8a2 2 0 0 1 2 2ZM12 19.2c-2.6 0-5.2-1.4-5.2-3.8S9.2 12.2 12 12.2s5.2.8 5.2 3.2-2.6 3.8-5.2 3.8Z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              {item.id === 'card' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <rect x="3.3" y="6.2" width="17.4" height="11.6" rx="2.3" />
+                  <path d="M3.3 10h17.4M7.2 14.5h3.5" stroke-linecap="round" />
+                </svg>
+              )}
+              {item.id === 'atmosphere' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <path d="M12 20.2s-6.7-3.9-6.7-9a3.8 3.8 0 0 1 6.7-2.4 3.8 3.8 0 0 1 6.7 2.4c0 5.1-6.7 9-6.7 9Z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              {item.id === 'events' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <rect x="3.8" y="5.2" width="16.4" height="14.8" rx="2.2" />
+                  <path d="M8 3.8v2.8M16 3.8v2.8M3.8 10h16.4M8.3 13.2h7.4M8.3 16h4.2" stroke-linecap="round" />
+                </svg>
+              )}
+              {item.id === 'outdoor' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <path d="M12 4.2 5.2 10h13.6L12 4.2Z" stroke-linejoin="round" />
+                  <path d="M12 10v8.6M7.3 18.6h9.4M9.2 14.4h5.6" stroke-linecap="round" />
+                </svg>
+              )}
+              {item.id === 'catering' && (
+                <svg viewBox="0 0 24 24" class="size-7 fill-none stroke-current stroke-[1.9]" aria-hidden="true">
+                  <path d="M4.2 13.2h15.6l-1.2 5H5.4l-1.2-5ZM7 13.2l1.4-4.4h7.2l1.4 4.4M12 6.2V4.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-sm font-semibold tracking-tight text-[#2b1d14]">{item.label}</h3>
+          </article>
+        ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 reveal md:py-16">
+    <div class="flex items-end justify-between gap-6">
+      <div>
+        <h2 class="text-2xl font-black uppercase tracking-tight text-[#2b1d14] md:text-4xl">Galerie kavárny</h2>
+        <p class="mt-2 text-sm text-black/70">Atmosféra, která chutná.</p>
+      </div>
+    </div>
+
+    <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
+      {[
+        {src: gallery1, alt: 'Kavárna Na kávičku – interiér'},
+        {src: gallery2, alt: 'Kavárna Na kávičku – posezení'},
+        {src: gallery3, alt: 'Kavárna Na kávičku – detail'},
+        {src: gallery4, alt: 'Kavárna Na kávičku – atmosféra'},
+        {src: gallery5, alt: 'Kavárna Na kávičku – zákusky'},
+        {src: gallery6, alt: 'Kavárna Na kávičku – bar'},
+      ].map((img) => (
+        <Image
+          src={img.src}
+          alt={img.alt}
+          widths={[420, 640, 900, 1200]}
+          sizes="(min-width: 768px) 30vw, 45vw"
+          loading="lazy"
+          class="aspect-[4/3] w-full rounded-3xl object-cover shadow-sm ring-1 ring-black/10"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section id="recenze" class="mx-auto max-w-6xl scroll-mt-28 px-4 py-14 reveal md:py-16">
+    <div class="rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5 md:p-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p class="inline-flex items-center gap-2 rounded-full bg-[#f8edd7] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#7a5635]">
+            <span class="inline-flex size-5 items-center justify-center rounded-full bg-[#f3b62d] text-[#2a160c]">
+              <svg viewBox="0 0 24 24" class="size-3.5 fill-current" aria-hidden="true">
+                <path d="M12 2.5 14.8 8l5.9.9-4.3 4.2 1 5.9-5.4-2.8-5.3 2.8 1-5.9L3.4 8.9 9.3 8 12 2.5Z" />
+              </svg>
+            </span>
+            {homepage.reviewsEyebrow}
+          </p>
+          <h2 class="mt-3 text-2xl font-black uppercase tracking-tight text-[#2b1d14] md:text-4xl">{homepage.reviewsHeading}</h2>
+          <p class="mt-2 max-w-2xl text-sm text-black/70">{homepage.reviewsIntro}</p>
+        </div>
+        <a
+          href={site.socials.googleReviews}
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex items-center gap-2 rounded-full bg-[#2a160c] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#3a2113]"
+        >
+          Zobrazit recenze
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {homepage.reviews.map((review) => (
+          <article class="rounded-2xl bg-[#fbf7ea] p-5 ring-1 ring-[#eadfcb]">
+            <div class="text-[#f3b62d]">{'★'.repeat(review.rating)}</div>
+            <p class="mt-2 text-sm text-black/75">{review.text}</p>
+            <p class="mt-3 text-xs font-medium text-black/50">{review.author} · {review.source}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="mx-auto max-w-6xl scroll-mt-28 px-4 pb-16 pt-8 reveal md:pt-10">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+        <h2 class="text-2xl font-black uppercase tracking-tight text-[#2b1d14]">Kontakt</h2>
+        <p class="mt-2 text-sm text-black/70">Soukromé akce, zákusky, catering i jiné dotazy.</p>
+        <div class="mt-6 grid gap-2 text-sm text-black/70">
+          <a href={`tel:${site.phone.replaceAll(' ', '')}`} class="font-semibold text-black/85">{site.phone}</a>
+          <a href={`mailto:${site.email}`} class="font-semibold text-black/85">{site.email}</a>
+          <a href={site.socials.maps} target="_blank" rel="noreferrer" class="text-[#c58a2a] underline underline-offset-4">Kudy k nám ↗</a>
+        </div>
+        <p class="mt-4 text-xs text-black/55">Provozovatel: {site.name}, IČO: {site.companyId}</p>
+        <div class="mt-6 flex items-center gap-3">
+          <a
+            href={site.socials.instagram}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram Na kávičku"
+            class="inline-flex size-10 items-center justify-center rounded-full border border-black/10 bg-[#fbf7ea] text-[#2a160c] transition hover:-translate-y-0.5 hover:bg-[#f3ebdc]"
+          >
+            <svg viewBox="0 0 24 24" class="size-5 fill-current" aria-hidden="true">
+              <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9Zm9.6 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Z" />
+            </svg>
+          </a>
+          <a
+            href={site.socials.facebook}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook Na kávičku"
+            class="inline-flex size-10 items-center justify-center rounded-full border border-black/10 bg-[#fbf7ea] text-[#2a160c] transition hover:-translate-y-0.5 hover:bg-[#f3ebdc]"
+          >
+            <svg viewBox="0 0 24 24" class="size-5 fill-current" aria-hidden="true">
+              <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5H17V4.9A23 23 0 0 0 14.5 4C12 4 10.3 5.5 10.3 8.2V11H8v3h2.3v8h3.2Z" />
+            </svg>
+          </a>
+          <a
+            href={site.socials.googleReviews}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Google recenze Na kávičku"
+            class="inline-flex size-10 items-center justify-center rounded-full border border-[#e4d2ad] bg-[#f3b62d] text-[#2a160c] transition hover:-translate-y-0.5 hover:bg-[#f1c25f]"
+          >
+            <svg viewBox="0 0 24 24" class="size-5 fill-current" aria-hidden="true">
+              <path d="M12 2.5 14.8 8l5.9.9-4.3 4.2 1 5.9-5.4-2.8-5.3 2.8 1-5.9L3.4 8.9 9.3 8 12 2.5Z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5" method="post" action={`mailto:${site.email}`} enctype="text/plain">
+        <h3 class="text-lg font-semibold text-[#121212]">Napište nám</h3>
+        <div class="mt-5 grid gap-3">
+          <input required name="name" placeholder="Jméno a příjmení *" class="rounded-2xl border border-black/10 bg-[#fbf7ea] px-4 py-3 text-sm" />
+          <input required type="email" name="email" placeholder="Email *" class="rounded-2xl border border-black/10 bg-[#fbf7ea] px-4 py-3 text-sm" />
+          <input name="phone" placeholder="Telefon" class="rounded-2xl border border-black/10 bg-[#fbf7ea] px-4 py-3 text-sm" />
+          <textarea required rows={4} name="message" placeholder="Dobrý den..." class="rounded-2xl border border-black/10 bg-[#fbf7ea] px-4 py-3 text-sm"></textarea>
+          <button class="rounded-full bg-[#c58a2a] px-5 py-3 text-sm font-semibold text-white hover:bg-[#b77d1f]">Odeslat</button>
+          <p class="text-xs leading-relaxed text-black/55">
+            Odesláním formuláře berete na vědomí zpracování osobních údajů za účelem vyřízení vašeho dotazu.
+            Více v
+            <a href="/gdpr/" class="text-[#8b6540] underline underline-offset-4">ochraně osobních údajů</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    const chips = document.querySelectorAll('.menu-chip');
+    const sections = document.querySelectorAll('.menu-section');
+    const searchInput = document.getElementById('menu-search');
+    const prevBtn = document.getElementById('menu-prev');
+    const nextBtn = document.getElementById('menu-next');
+    const pageInfo = document.getElementById('menu-page-info');
+    let activeFilter = 'all';
+    let activeQuery = '';
+    let currentPage = 1;
+    let maxPage = 1;
+    const pageSize = 4;
+
+    sections.forEach((section) => {
+      section.addEventListener('toggle', () => {
+        if (!section.open) return;
+        sections.forEach((other) => {
+          if (other !== section) other.removeAttribute('open');
+        });
+      });
+    });
+
+    const applyMenuFilter = () => {
+      const visibleSections = [];
+      sections.forEach((section) => {
+        const sectionCategory = section.dataset.category;
+        const sectionMatchesFilter = activeFilter === 'all' || sectionCategory === activeFilter;
+        const rows = section.querySelectorAll('.menu-item');
+        let visibleRows = 0;
+
+        rows.forEach((row) => {
+          const hay = (row.dataset.search || '').toLowerCase();
+          const matchesQuery = !activeQuery || hay.includes(activeQuery);
+          const visible = sectionMatchesFilter && matchesQuery;
+          row.style.display = visible ? '' : 'none';
+          if (visible) visibleRows += 1;
+        });
+
+        const sectionVisible = sectionMatchesFilter && visibleRows > 0;
+        if (sectionVisible) visibleSections.push(section);
+        section.style.display = 'none';
+        section.removeAttribute('open');
+      });
+
+      maxPage = Math.max(1, Math.ceil(visibleSections.length / pageSize));
+      if (currentPage > maxPage) currentPage = maxPage;
+      if (currentPage < 1) currentPage = 1;
+
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      visibleSections.slice(start, end).forEach((section) => {
+        section.style.display = '';
+      });
+
+      if (pageInfo) pageInfo.textContent = `Strana ${currentPage} z ${maxPage}`;
+      if (prevBtn) prevBtn.disabled = currentPage <= 1;
+      if (nextBtn) nextBtn.disabled = currentPage >= maxPage;
+      if (prevBtn) prevBtn.style.opacity = currentPage <= 1 ? '0.45' : '1';
+      if (nextBtn) nextBtn.style.opacity = currentPage >= maxPage ? '0.45' : '1';
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const filter = chip.dataset.filter || 'all';
+        activeFilter = filter;
+        currentPage = 1;
+        chips.forEach((c) => {
+          c.classList.remove('is-active', 'bg-white', 'text-black');
+          c.classList.add('bg-white/10', 'text-white');
+        });
+        chip.classList.add('is-active', 'bg-white', 'text-black');
+        chip.classList.remove('bg-white/10', 'text-white');
+        applyMenuFilter();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (event) => {
+        activeQuery = event.target.value.trim().toLowerCase();
+        currentPage = 1;
+        applyMenuFilter();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentPage -= 1;
+        applyMenuFilter();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        currentPage += 1;
+        applyMenuFilter();
+      });
+    }
+
+    applyMenuFilter();
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      },
+      {threshold: 0.12}
+    );
+    reveals.forEach((el) => revealObserver.observe(el));
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const beans = document.querySelectorAll('.bean-interactive');
+
+    beans.forEach((bean, index) => {
+      bean.style.setProperty('--phase', `${index * 0.85}`);
+    });
+
+    if (!reduceMotion) {
+      const animateBeans = (time) => {
+        beans.forEach((bean) => {
+          const phase = Number(bean.style.getPropertyValue('--phase') || 0);
+          const lift = Math.sin(time / 850 + phase) * 4;
+          bean.style.setProperty('--lift', `${lift}px`);
+        });
+        requestAnimationFrame(animateBeans);
+      };
+      requestAnimationFrame(animateBeans);
+    }
+  </script>
+
+  <style is:inline>
+    .brew-hero {
+      background: linear-gradient(140deg, #25140b 0%, #3a2113 45%, #2a160c 100%);
+    }
+
+    .paper-edge {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23fbf7ea' d='M0,28 C95,58 180,6 280,36 C365,62 455,8 545,34 C630,60 726,16 810,41 C905,69 1000,11 1085,38 C1175,66 1275,16 1360,40 C1400,52 1425,56 1440,54 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .paper-edge-top {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23fbf7ea' d='M0,120 C80,85 170,120 260,95 C350,70 455,122 540,98 C640,70 730,118 820,95 C910,72 1000,118 1080,96 C1170,72 1275,120 1360,98 C1405,85 1428,87 1440,90 L1440,0 L0,0 Z'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .bean {
+      position: absolute;
+      opacity: 0.9;
+      filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.28));
+      user-select: none;
+      pointer-events: none;
+      --lift: 0px;
+      transform: translate3d(0, var(--lift), 0) rotate(var(--rot));
+      transition: transform 220ms ease-out;
+    }
+
+    .bean-a { top: 14%; right: 10%; width: 68px; --rot: -18deg; }
+    .bean-b { top: 28%; right: 22%; width: 62px; --rot: 12deg; }
+    .bean-c { top: 54%; right: 8%; width: 70px; --rot: -32deg; }
+    .bean-d { top: 72%; left: 7%; width: 62px; --rot: 20deg; opacity: 0.75; }
+    .bean-e { top: 10%; left: 8%; width: 78px; --rot: -14deg; opacity: 0.82; }
+    .bean-f { top: 20%; right: 7%; width: 78px; --rot: 10deg; }
+    .bean-g { top: 66%; right: 9%; width: 86px; --rot: -16deg; opacity: 0.82; }
+    .bean-h { bottom: 11%; left: 6%; width: 95px; --rot: 8deg; opacity: 0.8; }
+    .bean-i { top: 36%; left: 8%; width: 74px; --rot: -22deg; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</BaseLayout>
+

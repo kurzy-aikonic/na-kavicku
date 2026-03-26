@@ -1,0 +1,65 @@
+---
+import {Image} from 'astro:assets'
+import {site} from '../config/site'
+import logoNaKavicku from '../assets/images/logo-na-kavicku.png'
+
+const nav = [
+  {href: '#uvod', label: 'Úvod'},
+  {href: '#napojovy-listek', label: 'Nápojový lístek'},
+  {href: '#o-kavarne', label: 'O kavárně'},
+  {href: '#kontakt', label: 'Kontakt'},
+] as const
+---
+
+<header class="sticky top-0 z-40 border-b border-white/10 bg-[#2a160c]/88 backdrop-blur supports-[backdrop-filter]:bg-[#2a160c]/80">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+    <a href="/" class="group inline-flex items-center">
+      <Image
+        src={logoNaKavicku}
+        alt={`Logo ${site.name}`}
+        widths={[240, 360, 520]}
+        sizes="(min-width: 768px) 220px, 170px"
+        class="h-14 w-auto object-contain brightness-0 invert md:h-16"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Hlavní navigace">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-xl px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c58a2a]"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.socials.maps}
+        target="_blank"
+        rel="noreferrer"
+        class="ml-1 inline-flex items-center gap-2 rounded-2xl bg-[#2a160c] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#3a2113] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c58a2a]"
+      >
+        Kudy k nám
+        <span aria-hidden="true" class="text-white/70">↗</span>
+      </a>
+    </nav>
+
+    <details class="md:hidden">
+      <summary class="list-none rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white">
+        Menu
+      </summary>
+      <div class="mt-2 rounded-2xl border border-white/20 bg-[#2a160c] p-2 shadow-sm">
+        <div class="grid">
+          {nav.map((item) => (
+            <a href={item.href} class="rounded-xl px-3 py-2 text-sm font-medium text-white/85 hover:bg-white/10">
+              {item.label}
+            </a>
+          ))}
+          <a href={site.socials.maps} target="_blank" rel="noreferrer" class="mt-1 rounded-xl bg-[#2a160c] px-3 py-2 text-sm font-semibold text-white hover:bg-[#3a2113]">
+            Kudy k nám ↗
+          </a>
+        </div>
+      </div>
+    </details>
+  </div>
+</header>
+

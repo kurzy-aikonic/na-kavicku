@@ -1,0 +1,43 @@
+---
+import '../styles/global.css'
+import Seo from '../components/Seo.astro'
+import JsonLd from '../components/JsonLd.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import CookieConsent from '../components/CookieConsent.astro'
+
+type Props = {
+  title: string
+  description: string
+  path?: string
+  imagePath?: string
+  noindex?: boolean
+}
+
+const {title, description, path, imagePath, noindex = false} = Astro.props
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <Seo title={title} description={description} path={path} imagePath={imagePath} noindex={noindex} />
+    <JsonLd />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#C58A2A" />
+  </head>
+  <body class="min-h-dvh">
+    <a
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg"
+      href="#content"
+    >
+      Přeskočit na obsah
+    </a>
+    <Header />
+    <main id="content" class="relative">
+      <slot />
+    </main>
+    <Footer />
+    <CookieConsent />
+  </body>
+</html>
+

@@ -1,0 +1,72 @@
+---
+import {site} from '../config/site'
+
+const to24h = (value: string) => {
+  const [rawHour, rawMinute = '00'] = value.split(':')
+  const hour = rawHour.padStart(2, '0')
+  const minute = rawMinute.padStart(2, '0')
+  return `${hour}:${minute}`
+}
+
+const openingHoursSpecification = site.openingHours
+  .map((row) => {
+    const dayOfWeek =
+      row.days.toLowerCase().includes('pondělí') && row.days.toLowerCase().includes('pátek')
+        ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+        : row.days.toLowerCase().includes('sobota')
+          ? ['Saturday']
+          : row.days.toLowerCase().includes('neděle')
+            ? ['Sunday']
+            : undefined
+
+    if (!dayOfWeek) return null
+    const [opensRaw, closesRaw] = row.hours.split('–').map((s) => s.trim())
+
+    return {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek,
+      opens: to24h(opensRaw),
+      closes: to24h(closesRaw),
+    }
+  })
+  .filter(Boolean)
+
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  '@id': `${site.url}/#cafe`,
+  name: site.name,
+  image: `${site.url}/og.jpg`,
+  logo: `${site.url}/favicon.svg`,
+  url: site.url,
+  inLanguage: 'cs-CZ',
+  telephone: site.phone,
+  email: site.email,
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'IČO',
+    value: site.companyId,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address,
+    addressLocality: 'Ostrava',
+    addressCountry: 'CZ',
+  },
+  sameAs: [site.socials.instagram, site.socials.facebook, site.socials.googleReviews, site.socials.maps],
+  openingHoursSpecification,
+} as const
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  inLanguage: 'cs-CZ',
+} as const
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+
